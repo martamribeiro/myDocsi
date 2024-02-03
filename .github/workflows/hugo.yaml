@@ -1,118 +1,78 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2759
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Italic;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
-}
-{\colortbl;\red255\green255\blue255;\red135\green136\blue117;\red21\green23\blue26;\red173\green173\blue173;
-\red0\green0\blue109;\red67\green67\blue67;\red172\green117\blue53;\red17\green137\blue135;}
-{\*\expandedcolortbl;;\cssrgb\c60000\c60000\c53333;\cssrgb\c10588\c12157\c13725\c5098;\cssrgb\c73333\c73333\c73333;
-\cssrgb\c0\c0\c50196;\cssrgb\c33333\c33333\c33333;\cssrgb\c73333\c53333\c26667;\cssrgb\c0\c60000\c60000;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
-
-\f0\i\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
-\f1\i0 \cf4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 name\cf6 :\cf4  \cf6 Deploy Hugo site to Pages\cf4 \
-\
-\cf5 on\cf6 :\cf4 \
-  
-\f0\i \cf2 # Runs on pushes targeting the default branch
-\f1\i0 \cf4 \
-  \cf5 push\cf6 :\cf4 \
-    \cf5 branches\cf6 :\cf4 \
-      \cf6 - main\cf4 \
-\
-  
-\f0\i \cf2 # Allows you to run this workflow manually from the Actions tab
-\f1\i0 \cf4 \
-  \cf5 workflow_dispatch\cf6 :\cf4 \
-\
-\pard\pardeftab720\partightenfactor0
+name: Deploy Hugo site to Pages
 
-\f0\i \cf2 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-\f1\i0 \cf4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 permissions\cf6 :\cf4 \
-  \cf5 contents\cf6 :\cf4  \cf6 read\cf4 \
-  \cf5 pages\cf6 :\cf4  \cf6 write\cf4 \
-  \cf5 id-token\cf6 :\cf4  \cf6 write\cf4 \
-\
-\pard\pardeftab720\partightenfactor0
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - main
 
-\f0\i \cf2 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-\f1\i0 \cf4 \
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-\f0\i \cf2 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-\f1\i0 \cf4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 concurrency\cf6 :\cf4 \
-  \cf5 group\cf6 :\cf4  \cf7 "pages"\cf4 \
-  \cf5 cancel-in-progress\cf6 :\cf4  
-\f2\b \cf6 false
-\f1\b0 \cf4 \
-\
-\pard\pardeftab720\partightenfactor0
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-\f0\i \cf2 # Default to bash
-\f1\i0 \cf4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 defaults\cf6 :\cf4 \
-  \cf5 run\cf6 :\cf4 \
-    \cf5 shell\cf6 :\cf4  \cf6 bash\cf4 \
-\
-\cf5 jobs\cf6 :\cf4 \
-  
-\f0\i \cf2 # Build job
-\f1\i0 \cf4 \
-  \cf5 build\cf6 :\cf4 \
-    \cf5 runs-on\cf6 :\cf4  \cf6 ubuntu-latest\cf4 \
-    \cf5 env\cf6 :\cf4 \
-      \cf5 HUGO_VERSION\cf6 :\cf4  \cf8 0.121.2\cf4 \
-    \cf5 steps\cf6 :\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Install Hugo CLI\cf4 \
-        \cf5 run\cf6 :\cf4  \cf6 |\cf7 \
-          wget -O $\{\{ runner.temp \}\}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v$\{HUGO_VERSION\}/hugo_extended_$\{HUGO_VERSION\}_linux-amd64.deb \\\
-          && sudo dpkg -i $\{\{ runner.temp \}\}/hugo.deb\cf4           \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Install Dart Sass\cf4 \
-        \cf5 run\cf6 :\cf4  \cf6 sudo snap install dart-sass\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Checkout\cf4 \
-        \cf5 uses\cf6 :\cf4  \cf6 actions/checkout@v4\cf4 \
-        \cf5 with\cf6 :\cf4 \
-          \cf5 submodules\cf6 :\cf4  \cf6 recursive\cf4 \
-          \cf5 fetch-depth\cf6 :\cf4  \cf8 0\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Setup Pages\cf4 \
-        \cf5 id\cf6 :\cf4  \cf6 pages\cf4 \
-        \cf5 uses\cf6 :\cf4  \cf6 actions/configure-pages@v4\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Install Node.js dependencies\cf4 \
-        \cf5 run\cf6 :\cf4  \cf7 "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Build with Hugo\cf4 \
-        \cf5 env\cf6 :\cf4 \
-          
-\f0\i \cf2 # For maximum backward compatibility with Hugo modules
-\f1\i0 \cf4 \
-          \cf5 HUGO_ENVIRONMENT\cf6 :\cf4  \cf6 production\cf4 \
-          \cf5 HUGO_ENV\cf6 :\cf4  \cf6 production\cf4 \
-        \cf5 run\cf6 :\cf4  \cf6 |\cf7 \
-          hugo \\\
-            --gc \\\
-            --minify \\\
-            --baseURL "$\{\{ steps.pages.outputs.base_url \}\}/"\cf4           \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Upload artifact\cf4 \
-        \cf5 uses\cf6 :\cf4  \cf6 actions/upload-pages-artifact@v2\cf4 \
-        \cf5 with\cf6 :\cf4 \
-          \cf5 path\cf6 :\cf4  \cf6 ./public\cf4 \
-\
-  
-\f0\i \cf2 # Deployment job
-\f1\i0 \cf4 \
-  \cf5 deploy\cf6 :\cf4 \
-    \cf5 environment\cf6 :\cf4 \
-      \cf5 name\cf6 :\cf4  \cf6 github-pages\cf4 \
-      \cf5 url\cf6 :\cf4  \cf6 $\{\{ steps.deployment.outputs.page_url \}\}\cf4 \
-    \cf5 runs-on\cf6 :\cf4  \cf6 ubuntu-latest\cf4 \
-    \cf5 needs\cf6 :\cf4  \cf6 build\cf4 \
-    \cf5 steps\cf6 :\cf4 \
-      \cf6 - \cf5 name\cf6 :\cf4  \cf6 Deploy to GitHub Pages\cf4 \
-        \cf5 id\cf6 :\cf4  \cf6 deployment\cf4 \
-        \cf5 uses\cf6 :\cf4  \cf6 actions/deploy-pages@v3}
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.121.2
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Build with Hugo
+        env:
+          # For maximum backward compatibility with Hugo modules
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./public
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
