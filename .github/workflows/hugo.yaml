@@ -45,6 +45,9 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
           # Sets up Hugo
       # - name: Setup Hugo
       #   uses: peaceiris/actions-hugo@v2
