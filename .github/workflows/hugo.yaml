@@ -34,15 +34,15 @@ jobs:
     # env:
     #   HUGO_VERSION: 0.121.2
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # - name: Checkout
+      - uses: actions/checkout@v4
    #https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/
       # - name: Setup Pages
       #   id: pages
       #   uses: actions/configure-pages@v4
           # Sets up Hugo
       - name: Setup Hugo
-       uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v2
         with:
         hugo-version: '0.121.2'
       - name: Install Node.js dependencies
