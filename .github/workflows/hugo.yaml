@@ -4,7 +4,7 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches: [ master ]
-  pull_request:
+
 name: Test
 env:
     GOPROXY: https://proxy.golang.org
@@ -14,7 +14,10 @@ env:
     DART_SASS_SHA_MACOS: 11c70f259836b250b44a9cb57fed70e030f21f45069b467d371685855f1eb4f0
     DART_SASS_SHA_WINDOWS: cd8cd36a619dd8e27f93d3186c52d70eb7d69472aa6c85f5094b29693e773f64
 permissions:
-  contents: read
+    contents: read
+    pages: write
+    id-token: write
+
 jobs:
   test:
     strategy:
