@@ -39,9 +39,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: '/opt/hostedtoolcache/node/18.19.0/x64'
-          # # https://github.com/actions/setup-node#caching-packages-dependencies
+          cache: 'npm'
+          # https://github.com/actions/setup-node#caching-packages-dependencies
           # cache-dependency-path: ''
+          cache-dependency-path: subdir/package-lock.json
         
 
       - run: npm ci
