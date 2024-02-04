@@ -37,7 +37,7 @@ jobs:
 
 
       - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci ||npm install -g postcss-cli || true "
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || npm install --save-dev autoprefixer || npm install -g postcss-cli || npm install -D postcss || true "
 
       # - name: Setup Node
       #   uses: actions/setup-node@v4
