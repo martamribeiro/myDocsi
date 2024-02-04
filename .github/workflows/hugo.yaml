@@ -39,13 +39,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 'latest'
-          cache: 'npm'
-          # The action defaults to search for the dependency file (package-lock.json,
-          # npm-shrinkwrap.json or yarn.lock) in the repository root, and uses its
-          # hash as a part of the cache key.
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          #cache-dependency-path: '**/package-lock.json'
-          cache-dependency-path: "${ GITHUB_WORKSPACE }/functions/package-lock.json"
+          # cache: 'npm'
+          # # The action defaults to search for the dependency file (package-lock.json,
+          # # npm-shrinkwrap.json or yarn.lock) in the repository root, and uses its
+          # # hash as a part of the cache key.
+          # # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          # #cache-dependency-path: '**/package-lock.json'
+          # cache-dependency-path: "${ GITHUB_WORKSPACE }/functions/package-lock.json"
 
       - run: npm ci
       - run: hugo --minify
