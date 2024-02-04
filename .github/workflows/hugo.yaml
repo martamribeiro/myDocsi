@@ -35,17 +35,25 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-          cache: 'npm'
-          # https://github.com/actions/setup-node#caching-packages-dependencies
-          # cache-dependency-path: ''
-          #cache-dependency-path: '**/package-lock.json'
+
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 16
+      #     cache: 'npm'
+      #     # https://github.com/actions/setup-node#caching-packages-dependencies
+      #     # cache-dependency-path: ''
+      #     #cache-dependency-path: '**/package-lock.json'
         
 
-      - run: npm ci
+      # - run: npm ci
+
+
+
+
       - run: hugo --minify
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
