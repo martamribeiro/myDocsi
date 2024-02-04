@@ -42,7 +42,7 @@ jobs:
           cache: 'npm'
           # https://github.com/actions/setup-node#caching-packages-dependencies
           # cache-dependency-path: ''
-          cache-dependency-path: subdir/package-lock.json
+          cache-dependency-path: '**/package-lock.json'
         
 
       - run: npm ci
