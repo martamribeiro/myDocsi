@@ -38,7 +38,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 'latest'
+          node-version: 18
           cache: ''
           # https://github.com/actions/setup-node#caching-packages-dependencies
           cache-dependency-path: ''
