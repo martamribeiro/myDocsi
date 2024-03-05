@@ -2,11 +2,12 @@ baseURL = "/"
 title = "Goldydocs"
 
 # Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
+contentDir = "content/pt"
+defaultContentLanguage = "pt"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
-enableMissingTranslationPlaceholders = true
+#Changed to not show i18n
+enableMissingTranslationPlaceholders = false
 
 enableRobotsTXT = true
 
@@ -54,16 +55,35 @@ anchor = "smart"
 # Language configuration
 
 [languages]
+
+[languages.pt]
+languageName ="Português"
+weight = 1
+contentDir = "content/pt"
+[languages.pt.params]
+title = "Goldydocs"
+description = "Um sitio Web Docsy"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
+#Fornecido copyright para ter algo específico em protuguÊs
+copyright = "Os autores do tema Docsy"
+
+
+
 [languages.en]
 languageName ="English"
+disabled = false
 # Weight used for sorting.
-weight = 1
+weight = 3
+#This line was missing and the pages e+in English were unavailable when the default language was changed do pt
+contentDir = "content/en"
 [languages.en.params]
 title = "Goldydocs"
 description = "A Docsy example site"
 
 [languages.no]
 languageName ="Norsk"
+weight = 2
 contentDir = "content/no"
 [languages.no.params]
 title = "Goldydocs"
@@ -71,13 +91,16 @@ description = "Docsy er operativsystem for skyen"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 
+
+
 [languages.fa]
 languageName ="فارسی"
+weight = 4
 contentDir = "content/fa"
 [languages.fa.params]
 title = "اسناد گلدی"
 description = "یک نمونه برای پوسته داکسی"
-time_format_default = "2006.01.02"
+ime_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
 
 [markup]
@@ -136,10 +159,10 @@ github_project_repo = "https://github.com/google/docsy"
 github_branch= "main"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "d72aa9b2712488cc3"
+#gcs_engine_id = "d72aa9b2712488cc3"
 
 # Enable Lunr.js offline search
-offlineSearch = false
+offlineSearch = true
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = false
